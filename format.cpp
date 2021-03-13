@@ -2,6 +2,8 @@
 #include <vector>
 #include <algorithm>
 #include <cmath>
+#include <queue>
+#include <string.h>
 
 using namespace std;
 
