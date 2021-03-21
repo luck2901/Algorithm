@@ -10,44 +10,43 @@
 
 using namespace std;
 
+vector<string> phone;
+
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
 
-    int t;
-    int n;
-    char s[10010];
-    scanf("%d", &t);
-
-    while (t--)
+    int t, n;
+    cin >> t;
+    while(t--)
     {
-        vector<string> phone;
-        scanf("%d", &n);
+        cin >> n;
         for (int i = 0; i < n; i++)
         {
-            scanf("%s", &s);
+            string s;
+            cin >> s;
             phone.push_back(s);
         }
-        bool pin = true;
         sort(phone.begin(), phone.end());
-
+        bool tag = true;
         for (int i = 0; i < n - 1; i++)
         {
-            int current = phone[i].length();
-            int next = phone[i + 1].length();
-            if (current >= next)
+            int first = phone[i].length();
+            int second = phone[i+1].length();
+            if(first >= second)
                 continue;
-
-            if (phone[i + 1].substr(0, current) == phone[i])
+            if(phone[i+1].substr(0,first)==phone[i])
             {
-                pin = false;
-                printf("NO\n");
+                tag = false;
                 break;
             }
         }
-        if (pin == true)
-            printf("YES\n");
+        phone.clear();
+        if (tag == true)
+            cout << "YES"<<endl;
+        else
+            cout << "NO"<<endl;
     }
 }
