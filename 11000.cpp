@@ -9,14 +9,14 @@ using namespace std;
 
 int N;
 
+priority_queue<int, vector<int>, greater<int> > q;
+vector<pair<int, int> > v;
+
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-
-    priority_queue<int, vector<int>, greater<int> > q;
-    vector<pair<int, int> > v;
 
     cin >> N;
     for (int i = 0; i < N; i++)
