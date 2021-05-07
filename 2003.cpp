@@ -21,18 +21,18 @@ int main()
 
     cin >> N >> M;
 
-    for (int i = 0; i < N;i++)
+    for (int i = 0; i < N; i++)
         cin >> arr[i];
 
-    while(true)
+    while (true)
     {
-        if(sum >=M)
+        if (sum >= M)
             sum -= arr[start++];
-        else if(end == N)
+        else if (end == N)
             break;
         else
             sum += arr[end++];
-        if(sum == M)
+        if (sum == M)
             result++;
     }
     cout << result << endl;
