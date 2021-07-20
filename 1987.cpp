@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <cmath>
+#include <set>
 #include <queue>
 #include <string.h>
 
@@ -10,23 +10,26 @@ using namespace std;
 #define endl "\n"
 
 int R, C;
-char map[21][21];
-int dx[] = {1, -1, 0, 0};
-int dy[] = {0, 0, 1, -1};
+char maps[21][21];
+bool check[26];
+int answer = 0;
+int dy[4] = {1, -1, 0, 0};
+int dx[4] = {0, 0, 1, -1};
 
-int bfs()
+void dfs(int y, int x, int cnt)
 {
-    queue<pair<int, int>> q;
-    q.push(make_pair(0, 0));
-    while(!q.empty())
+    answer = max(answer, cnt);
+
+    for (int i = 0; i < 4;i++)
     {
-        int y = q.front().first;
-        int x = q.front().second;
-        q.pop();
-        for (int i = 0; i < 4;i++)
-        {
-            
-        }
+        int ny = y + dy[i];
+        int nx = x + dx[i];
+
+        if(ny <0 || nx < 0 || ny >= R|| nx >= C || check[maps[ny][nx]-'A'] == true)
+            continue;
+        check[maps[ny][nx] - 'A'] = true;
+        dfs(ny, nx, cnt + 1);
+        check[maps[ny][nx] - 'A'] = false;
     }
 }
 
@@ -36,11 +39,19 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
 
+
     cin >> R >> C;
 
     for (int i = 0; i < R;i++)
-        for (int j = 0; j < C;j++)
-            cin >> map[i][j];
+    {
+        string in;
+        cin >> in;
+        for (int j = 0; j < C; j++)
+            maps[i][j] = in[j];
+    }
 
-    
+    check[maps[0][0] - 'A'] = true;
+    dfs(0, 0, 1);
+
+    cout << answer << endl;
 }
